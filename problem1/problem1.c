@@ -140,14 +140,14 @@ void spawn_processes(int NP, int max_children, pid_t main_pid, int writingpipe) 
     // read from the children pipes
     if(pids[child_num] - main_pid < NP) {
       close(pipes[child_num][1]);
-      read(pipes[child_num][0], buffer, 6);
-      printf("read from the pipe: %s\n", buffer);
+      read(pipes[child_num][0], buffer, sizeof(buffer));
+      printf("read from the pipe: %s \n", buffer);
     }
     wait(NULL);
   }
   printf("I am the parent process pid: %d \n", getpid());
   // write to the parent pipe
-  write(writingpipe, "test", 6);
+  write(writingpipe, "test\0", sizeof("test\0"));
   free(pids);
   return;
 }
@@ -160,6 +160,10 @@ int main(int argc, char* argv) {
   int max_children = 3;
   generate_file(25, 5);
   one_process(1);
-  spawn_processes(5, max_children, main_pid, first[0]);
+  spawn_processes(5, max_children, main_pid, first[1]);
+  char buffer[14];
+  close(first[1]);
+  read(first[0], buffer, sizeof(buffer));
+  printf("read from the main proc: %s \n", buffer);
   exit(EXIT_SUCCESS);
 }
