@@ -1,0 +1,31 @@
+Max: 3999 Avg: 2019 
+Single process found a key at line: 191.
+Single process found a key at line: 541.
+Single process found a key at line: 1107.
+Single process found a key at line: 1962.
+Single process found a key at line: 1985.
++---------------------------------+
+Hi, I'm process 0 and my parent had pid 4983.
+Hi, I'm process 1 and my parent is 0.
+Process 1 found a key at line: 191.
+Hi, I'm process 2 and my parent is 1.
+Hi, I'm process 3 and my parent is 2.
+Hi, I'm process 4 and my parent is 3.
+Process 4 found a key at line: 541.
+Hi, I'm process 5 and my parent is 4.
+Hi, I'm process 6 and my parent is 5.
+Hi, I'm process 7 and my parent is 6.
+Hi, I'm process 8 and my parent is 7.
+Hi, I'm process 9 and my parent is 8.
+Process 9 found a key at line: 1107.
+Hi, I'm process 10 and my parent is 9.
+Hi, I'm process 11 and my parent is 10.
+Hi, I'm process 12 and my parent is 11.
+Hi, I'm process 13 and my parent is 12.
+Hi, I'm process 14 and my parent is 13.
+Hi, I'm process 15 and my parent is 14.
+Hi, I'm process 16 and my parent is 15.
+Process 16 found a key at line: 1962.
+Process 16 found a key at line: 1985.
+Hi, I'm process 17 and my parent is 16.
+Max: 3999 Avg: 2019 
