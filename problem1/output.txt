@@ -1,27 +1,27 @@
-Max: 3999 Avg: 1993 
-Single process found a key at line: 4734.
-Single process found a key at line: 6470.
-Single process found a key at line: 13949.
-Single process found a key at line: 36475.
-Single process found a key at line: 46253.
-Time used for one process: 0.002781
+Max: 3999 Avg: 1996 
+Single process found a key at line: 13430.
+Single process found a key at line: 27611.
+Single process found a key at line: 28295.
+Single process found a key at line: 36670.
+Single process found a key at line: 38064.
+Time used for one process: 0.006715
 +---------------------------------+
-Hi, I'm process 0 and my parent had pid 2432.
+Hi, I'm process 0 and my parent had pid 77737.
 Hi, I'm process 1 and my parent is 0.
-Process 0 found a key at line: 4734.
-Process 0 found a key at line: 6470.
 Hi, I'm process 2 and my parent is 1.
 Hi, I'm process 3 and my parent is 2.
+Process 1 found a key at line: 13430.
 Hi, I'm process 4 and my parent is 3.
 Hi, I'm process 5 and my parent is 4.
-Process 1 found a key at line: 13949.
-Process 3 found a key at line: 36475.
-Process 4 found a key at line: 46253.
-Process 4 found a key at line: 46253.
-Time used for 5 processes: 0.000796
-Max: 3999 Avg: 1993 
+Process 2 found a key at line: 27611.
+Process 2 found a key at line: 28295.
+Process 3 found a key at line: 36670.
+Process 3 found a key at line: 38064.
+Time used for 5 processes: 0.001765
+Max: 3999 Avg: 1996 
 +---------------------------------+
-Process 0 found a key at line: 4734.
-Process 0 found a key at line: 6470.
-Process 1 found a key at line: 13949.
-Time used for 3 keys: 0.001680
+Process 1 found a key at line: 13430.
+Process 2 found a key at line: 27611.
+Process 2 found a key at line: 28295.
+Process 3 found a key at line: 36670.
+Time used for 3 keys: 0.002152

@@ -348,7 +348,7 @@ void n_keys(int N, int NP, int num_lines) {
   wait(NULL);
 }
 
-int main(int argc, char *argv) {
+int main(int argc, char **argv) {
   int NP = 5;
   int keys = 3;
   int num_lines = 50000;
