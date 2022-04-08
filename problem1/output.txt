@@ -1,27 +1,27 @@
-Max: 3999 Avg: 1996 
-Single process found a key at line: 13430.
-Single process found a key at line: 27611.
-Single process found a key at line: 28295.
-Single process found a key at line: 36670.
-Single process found a key at line: 38064.
-Time used for one process: 0.006715
+Max: 3999 Avg: 1995 
+Single process found a key at line: 11909.
+Single process found a key at line: 28565.
+Single process found a key at line: 31910.
+Single process found a key at line: 35544.
+Single process found a key at line: 44690.
+Time used for one process: 0.003390
 +---------------------------------+
 Hi, I'm process 0 and my parent had pid 77737.
 Hi, I'm process 1 and my parent is 0.
 Hi, I'm process 2 and my parent is 1.
+Process 1 found a key at line: 11909.
 Hi, I'm process 3 and my parent is 2.
-Process 1 found a key at line: 13430.
 Hi, I'm process 4 and my parent is 3.
+Process 3 found a key at line: 31910.
+Process 3 found a key at line: 35544.
 Hi, I'm process 5 and my parent is 4.
-Process 2 found a key at line: 27611.
-Process 2 found a key at line: 28295.
-Process 3 found a key at line: 36670.
-Process 3 found a key at line: 38064.
-Time used for 5 processes: 0.001765
-Max: 3999 Avg: 1996 
+Process 4 found a key at line: 44690.
+Process 2 found a key at line: 28565.
+Process 4 found a key at line: 44690.
+Time used for 5 processes: 0.000881
+Max: 3999 Avg: 1995 
 +---------------------------------+
-Process 1 found a key at line: 13430.
-Process 2 found a key at line: 27611.
-Process 2 found a key at line: 28295.
-Process 3 found a key at line: 36670.
-Time used for 3 keys: 0.002152
+Process 1 found a key at line: 11909.
+Process 3 found a key at line: 31910.
+Process 3 found a key at line: 35544.
+Process 2 found a key at line: 28565.

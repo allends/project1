@@ -340,11 +340,9 @@ void n_keys(int N, int NP, int num_lines) {
     n_keys_spawn(N, NP, num_lines, 0, main_pid, lines, output);
     end = clock();
     cpu_time_used = ((double)(end - start) / CLOCKS_PER_SEC);
-    fprintf(output, "Time used for %d keys: %2f\n", N, cpu_time_used);
-    fflush(output);
+    printf("Time used for %d keys: %2f\n", N, cpu_time_used);
     exit(EXIT_SUCCESS);
   }
-  fclose(output);
   wait(NULL);
 }
 
