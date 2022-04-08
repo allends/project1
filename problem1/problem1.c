@@ -1,5 +1,6 @@
 #include <math.h>
 #include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -9,6 +10,16 @@
 
 #define MAXIMUM 4000
 #define BUFFERSIZE 1024
+int key_count = 0;
+int child_no;
+// -------------------------------------------------
+// Signal Section
+void increment_sig(int signo) { key_count++; }
+
+void child_exit(int signo) { exit(EXIT_SUCCESS); }
+
+// -------------------------------------------------
+// Helper Section and File Generation
 
 // selection sort for our program
 void swap(int *one, int *two) {
@@ -74,6 +85,9 @@ void generate_file(int L, int H) {
   return;
 }
 
+// -----------------------------------------------------------------
+// One process section
+
 // Use one process to find the average and the secrets
 void one_process() {
   int *secret_indicies = malloc(5 * sizeof(int));
@@ -110,14 +124,14 @@ void one_process() {
     fprintf(output, "Single process found a key at line: %d.\n",
             secret_indicies[i] + 1);
   }
-  printf("Time used for one process: %2f\n", cpu_time_used);
+  fprintf(output, "Time used for one process: %2f\n", cpu_time_used);
   fprintf(output, "+---------------------------------+\n");
   fclose(output);
   fclose(file);
 }
 
-// we have to keep track of each processes number.
-//
+// -----------------------------------------------------------------------------
+// Multiple Processes Section
 
 // Spawn N more processes and then search a section of the file
 void spawn_processes(int NP, int num_lines, pid_t p_num, int max_children,
@@ -154,7 +168,7 @@ void spawn_processes(int NP, int num_lines, pid_t p_num, int max_children,
       break;
     }
   } while (pids[child_num - 1] <= NP);
-  
+
   // look in the file
   int linesperchild = num_lines / NP;
   int total = 0;
@@ -211,8 +225,7 @@ void spawn_processes(int NP, int num_lines, pid_t p_num, int max_children,
   write(writingpipe, sendbuff, sizeof(sendbuff));
   free(pids);
   free(pipes);
-  if (getpid() != main_pid)
-    exit(EXIT_SUCCESS);
+  if (getpid() != main_pid) exit(EXIT_SUCCESS);
 }
 
 void multiple_processes(int NP, int num_lines, int max_children) {
@@ -242,7 +255,7 @@ void multiple_processes(int NP, int num_lines, int max_children) {
                   output);
   end = clock();
   cpu_time_used = ((double)(end - start) / CLOCKS_PER_SEC);
-  printf("Time used for %d processes: %2f\n", NP, cpu_time_used);
+  fprintf(output, "Time used for %d processes: %2f\n", NP, cpu_time_used);
   fflush(stdout);
   char buffer[BUFFERSIZE];
   close(first[1]);
@@ -256,13 +269,94 @@ void multiple_processes(int NP, int num_lines, int max_children) {
   fclose(output);
 }
 
+// --------------------------------------------------------------------------
+// Section for first N keys search
+void n_keys_spawn(int N, int NP, int num_lines, pid_t p_num, pid_t main_pid,
+                  char **lines, FILE *output) {
+  int process_count = getpid() - main_pid;
+  if (process_count < NP - 1) {
+    if (fork() == 0) {
+      // child
+      n_keys_spawn(N, NP, num_lines, getpid() - main_pid, main_pid, lines,
+                   output);
+      signal(SIGUSR2, child_exit);
+    }
+  }
+
+  // look in the file
+  int linesperchild = num_lines / NP;
+  int total = 0;
+  int local_max = 0;
+  int i;
+  for (i = p_num * linesperchild; i < p_num * linesperchild + linesperchild;
+       i++) {
+    int temp = atoi(lines[i]);
+    if (temp == -1) {
+      fprintf(output, "Process %d found a key at line: %d.\n", p_num, i + 1);
+      fflush(output);
+      kill(main_pid, SIGUSR1);
+    }
+  }
+  while (p_num == NP - 1 && i < num_lines) {
+    int temp = atoi(lines[i]);
+    if (temp == -1) {
+      fprintf(output, "Process %d found a key at line: %d.\n", p_num, i + 1);
+      fflush(output);
+      kill(main_pid, SIGUSR1);
+    }
+    i++;
+  }
+
+  if (getpid() != main_pid) exit(EXIT_SUCCESS);
+  while (key_count < N) {
+  }
+  for (int i = main_pid + 1; i < main_pid + NP; i++) {
+    kill(i, SIGUSR2);
+    wait(NULL);
+  }
+}
+
+void n_keys(int N, int NP, int num_lines) {
+  signal(SIGUSR1, increment_sig);
+  child_no = NP;
+  FILE *output = fopen("output.txt", "a");
+  fprintf(output, "+---------------------------------+\n");
+  fflush(output);
+  pid_t pid = fork();
+  if (pid == 0) {
+    pid_t main_pid = getpid();
+    // read the file and make an array with each index as a line of the file
+    char **lines = malloc(sizeof(char *) * num_lines);
+    FILE *file = fopen("secrets.txt", "r");
+    for (int i = 0; i < num_lines; i++) {
+      lines[i] = malloc(sizeof(char[BUFFERSIZE]));
+      fscanf(file, "%[^\n ] ", lines[i]);
+    }
+    fclose(file);
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
+    n_keys_spawn(N, NP, num_lines, 0, main_pid, lines, output);
+    end = clock();
+    cpu_time_used = ((double)(end - start) / CLOCKS_PER_SEC);
+    fprintf(output, "Time used for %d keys: %2f\n", N, cpu_time_used);
+    fflush(output);
+    exit(EXIT_SUCCESS);
+  }
+  fclose(output);
+  wait(NULL);
+}
+
 int main(int argc, char *argv) {
-  int NP = 50;
+  int NP = 5;
+  int keys = 3;
   int num_lines = 50000;
-  int max_children = 3;
+  int max_children = 5;
   generate_file(num_lines, 5);
 
   one_process();
   multiple_processes(NP, num_lines, max_children);
+  n_keys(keys, NP, num_lines);
   exit(EXIT_SUCCESS);
 }

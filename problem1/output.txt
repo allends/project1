@@ -1,64 +1,27 @@
-Max: 3999 Avg: 2005 
-Single process found a key at line: 7225.
-Single process found a key at line: 10441.
-Single process found a key at line: 35990.
-Single process found a key at line: 47409.
-Single process found a key at line: 47463.
+Max: 3999 Avg: 1993 
+Single process found a key at line: 4734.
+Single process found a key at line: 6470.
+Single process found a key at line: 13949.
+Single process found a key at line: 36475.
+Single process found a key at line: 46253.
+Time used for one process: 0.002781
 +---------------------------------+
 Hi, I'm process 0 and my parent had pid 2432.
 Hi, I'm process 1 and my parent is 0.
+Process 0 found a key at line: 4734.
+Process 0 found a key at line: 6470.
 Hi, I'm process 2 and my parent is 1.
 Hi, I'm process 3 and my parent is 2.
 Hi, I'm process 4 and my parent is 3.
 Hi, I'm process 5 and my parent is 4.
-Hi, I'm process 6 and my parent is 5.
-Hi, I'm process 7 and my parent is 6.
-Hi, I'm process 8 and my parent is 7.
-Process 7 found a key at line: 7225.
-Hi, I'm process 9 and my parent is 8.
-Hi, I'm process 10 and my parent is 9.
-Hi, I'm process 11 and my parent is 10.
-Process 10 found a key at line: 10441.
-Hi, I'm process 12 and my parent is 11.
-Hi, I'm process 13 and my parent is 12.
-Hi, I'm process 14 and my parent is 13.
-Hi, I'm process 15 and my parent is 14.
-Hi, I'm process 16 and my parent is 15.
-Hi, I'm process 17 and my parent is 16.
-Hi, I'm process 18 and my parent is 17.
-Hi, I'm process 19 and my parent is 18.
-Hi, I'm process 20 and my parent is 19.
-Hi, I'm process 21 and my parent is 20.
-Hi, I'm process 22 and my parent is 21.
-Hi, I'm process 23 and my parent is 22.
-Hi, I'm process 24 and my parent is 23.
-Hi, I'm process 25 and my parent is 24.
-Hi, I'm process 26 and my parent is 25.
-Hi, I'm process 27 and my parent is 26.
-Hi, I'm process 28 and my parent is 27.
-Hi, I'm process 29 and my parent is 28.
-Hi, I'm process 30 and my parent is 29.
-Hi, I'm process 31 and my parent is 30.
-Hi, I'm process 32 and my parent is 31.
-Hi, I'm process 33 and my parent is 32.
-Hi, I'm process 34 and my parent is 33.
-Hi, I'm process 35 and my parent is 34.
-Hi, I'm process 36 and my parent is 35.
-Process 35 found a key at line: 35990.
-Hi, I'm process 37 and my parent is 36.
-Hi, I'm process 38 and my parent is 37.
-Hi, I'm process 39 and my parent is 38.
-Hi, I'm process 40 and my parent is 39.
-Hi, I'm process 41 and my parent is 40.
-Hi, I'm process 42 and my parent is 41.
-Hi, I'm process 43 and my parent is 42.
-Hi, I'm process 44 and my parent is 43.
-Hi, I'm process 45 and my parent is 44.
-Hi, I'm process 46 and my parent is 45.
-Hi, I'm process 47 and my parent is 46.
-Hi, I'm process 48 and my parent is 47.
-Process 47 found a key at line: 47409.
-Process 47 found a key at line: 47463.
-Hi, I'm process 49 and my parent is 48.
-Hi, I'm process 50 and my parent is 49.
-Max: 3999 Avg: 2005 
+Process 1 found a key at line: 13949.
+Process 3 found a key at line: 36475.
+Process 4 found a key at line: 46253.
+Process 4 found a key at line: 46253.
+Time used for 5 processes: 0.000796
+Max: 3999 Avg: 1993 
++---------------------------------+
+Process 0 found a key at line: 4734.
+Process 0 found a key at line: 6470.
+Process 1 found a key at line: 13949.
+Time used for 3 keys: 0.001680
